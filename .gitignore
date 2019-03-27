@@ -2,3 +2,4 @@
 www/.cache/*
 www/.config
 .idea
+.DS_Store
