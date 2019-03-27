@@ -1,0 +1,40 @@
+version: "3"
+services:
+  nginx:
+    image: myxxqy/nginx:1.0
+    ports:
+      - "${NGINX_HTTP_HOST_PORT}:80"
+    volumes:
+      - ${SOURCE_DIR}:/var/wwwroot/:rw
+      - ${NGINX_CONFD_DIR}:/etc/nginx/conf.d/:rw
+      - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
+      - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
+    restart: always
+    networks:
+      - default
+  php72:
+    image: myxxqy/php:1.0
+    volumes:
+      - ${SOURCE_DIR}:/var/wwwroot/:rw
+      - ${PHP72_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP72_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - $PWD/fonts/:/usr/share/fonts
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+  mysql:
+    image: myxxqy/mysql:1.0
+    ports:
+      - "${MYSQL_HOST_PORT}:3306"
+    volumes:
+      - ${MYSQL_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql/:rw
+    restart: always
+    networks:
+      - default
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+networks:
+  default:

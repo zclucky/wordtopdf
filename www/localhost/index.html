@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DEMO页面</title>
+    <link href="public/css/index.css" rel="stylesheet" type="text/css"/>
+    <script src="public/js/jquery.min.js"></script>
+
+</head>
+<body>
+<div id="box">
+    <div id="word">
+        <img src="public/static/WORD.png" alt="">
+        <a href="public/static/word.docx" id="docx">吸毒人员登记表.docx</a>
+    </div>
+    <button id="btn">点击转换>>></button>
+
+    <div id="pdf">
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#btn").on("click", function () {
+            $("#pdf").html('');
+            let link = $("#docx").attr("href")
+            $.ajax({
+                async: true,
+                beforeSend: function () {
+                    ShowDiv();
+                },
+                complete: function () {
+                    HiddenDiv();
+                },
+                type : 'POST' ,
+                url : 'index.php',
+                data : {
+                    url:link
+                },
+                success: function (data) {
+                    let returnData = JSON.parse(data)
+                    if(returnData['status'] == 1){
+                        let node = "<img src='public/static/PDF.png'> <a target='_blank' href='" + returnData['msg'] + "'>吸毒人员登记表.pdf</a>"
+                        $(node).appendTo($("#pdf"))
+                    }else{
+                        alert(returnData['msg'])
+                    }
+                }
+            });
+
+        })
+
+        function ShowDiv() {
+            $("#loading").show();
+        }
+        function HiddenDiv() {
+            $("#loading").hide();
+        }
+    })
+</script>
+</body>
+</html>
