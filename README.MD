@@ -52,10 +52,10 @@ networks:
 
 ```    
 - 打开命令行，进入到当前目录，执行`docker-composer up -d`        
- ![](public/static/iterm2.png)
+ ![](www/localhost/public/static/iterm2.png)
 - 服务启动成功，打开浏览器输入`localhost/index.html`进入demo页面    
 如图所示：        
-![](public/static/demo.png)
+![](www/localhost/public/static/demo.png)
 
 ### 2.操作说明
 
@@ -101,5 +101,5 @@ Can't open Word doc with COM in PHP
 - 在`常规`的身份验证级别里面选择`无`，然后在`位置`属性里面选择`在数据所在的计算机运行应用程序(D)`。
 - 在`安全`里面，把`启动和激活权限`、`访问权限`和`配置权限`都设置成自定义，在里面都添加`Everyone`用户，权限都勾上。
 - 在`标识`属性里面（注意，这里最重要！！）选择`下列`用户，把远程登录的账户和密码写进去，然后点击`应用`和`确定`，如图：   
-![](public/static/windows-com.png)
+![](www/localhost/public/static/windows-com.png)
 然后运用业务代码，你会发现php的代码调用了系统组件服务的功能，打开了word文档，然后调用了微软的word文档相关接口进行另存为pdf。
