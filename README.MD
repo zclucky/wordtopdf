@@ -63,7 +63,8 @@ networks:
 ```
 unoconv -f pdf -o your_pdf_path  your_word_path
 ```
-至于中文乱码问题，这里我把所有中文字体的资源全部放在`fonts`文件夹里面，挂载到环境的`/usr/share/fonts`目录里即可自动转换。
+至于中文乱码问题，这里把**windows系统字体文件夹里所有的文件**全部放在`fonts`文件夹里面，挂载到环境的`/usr/share/fonts`目录里即可自动转换。   
+-- （*注意）这里fonts文件夹占用空间太大，请自行寻找fonts资源，放进去。
 
 ## windows环境下的转换
 
